@@ -2,7 +2,10 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const dotenv = require('dotenv');
 const router = express.Router();
+
+dotenv.config();
 
 // User Registration
 router.post("/register", async (req, res) => {
@@ -63,6 +66,7 @@ router.post("/login", async (req, res) => {
       expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
       httpOnly: true,
       sameSite: 'strict',
+      secure: process.env.NODE_ENV === 'production',  // Enable secure cookies in production
     };
 
     res.cookie("token", token, options).status(200).json({
