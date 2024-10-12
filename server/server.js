@@ -15,7 +15,10 @@ app.use(cookieParser());
 
 //Define cors
 const cors = require('cors');
-app.use(cors());
+app.use(cors({
+  origin: 'https://news-pulse-ui.vercel.app',  // Replace with your Vercel frontend URL
+  credentials: true,  // Allow cookies if needed
+}));
 
 // Database connection
 const connectDB = require('./config/db');
