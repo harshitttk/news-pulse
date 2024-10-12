@@ -16,7 +16,7 @@ app.use(cookieParser());
 //Define cors
 const cors = require('cors');
 app.use(cors({
-  origin: 'https://news-pulse-ui.vercel.app/',  // Frontend URL
+  origin: 'http://localhost:5173/',  // Frontend URL
   credentials: true                 // Allows credentials (cookies, headers, etc.)
 }));
 
