@@ -31,7 +31,7 @@ const News = () => {
     // Clear cookies or tokens if you're using any
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Clear token cookie
 
-    // Optionally clear any user state here
+    toast.success('Logout successful!');
     // Redirect to login or homepage after logout
     navigate('/login');
   };
