@@ -66,7 +66,6 @@ router.post("/login", async (req, res) => {
       expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
       httpOnly: true,
       sameSite: 'None', // Allow cross-origin requests with credentials
-      path: '/',    // Ensures the cookie is valid across the entire domain
       secure: process.env.NODE_ENV === 'production',  // Enable secure cookies in production
     };
 
