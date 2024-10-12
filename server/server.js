@@ -15,9 +15,7 @@ app.use(cookieParser());
 
 //Define cors
 const cors = require('cors');
-app.use(cors({
-  credentials: true                 // Allows credentials (cookies, headers, etc.)
-}));
+app.use(cors());
 
 // Database connection
 const connectDB = require('./config/db');
