@@ -22,7 +22,7 @@ const Login = () => {
       toast.success('Login successful!');
       navigate('/preferences');
     } catch (err) {
-      if (err.response && err.response.status === 400) {
+      if (err.response && err.response.status == 400) {
         toast.error('Invalid username or password');
       } else {
         toast.error('An error occurred. Please try again.');
