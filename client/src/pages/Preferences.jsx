@@ -23,6 +23,8 @@ const Preferences = () => {
 
   const onSubmit = async e => {
     e.preventDefault();
+    setLoading(true);
+    setClicked(true); // Set clicked state to true to trigger animation
     try {
       await axiosInstance.post('/api/news/preferences', { preferences });
       toast.success('Preferences saved successfully!');
