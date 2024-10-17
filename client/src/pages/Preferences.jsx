@@ -6,6 +6,8 @@ import Title from '../components/Title';
 
 const Preferences = () => {
   const [preferences, setPreferences] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [clicked, setClicked] = useState(false); // Clicked state for animation
   const navigate = useNavigate();
 
   const availablePreferences = ['technology', 'sports', 'finance', 'politics'];
@@ -31,6 +33,9 @@ const Preferences = () => {
       } else {
         toast.error('An error occurred while saving preferences.');
       }
+    }finally {
+      setLoading(false); // Reset loading state
+      setClicked(false);
     }
   };
 
@@ -55,9 +60,11 @@ const Preferences = () => {
           ))}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            className={`w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''} ${clicked ? 'clicked' : ''}`}
+            disabled={loading} // Disable button when loading
+            onClick={() => setClicked(true)}
           >
-            Save Preferences
+            {loading ? 'Saving your preferences...' : 'Save Preferences'}
           </button>
         </form>
       </div>
