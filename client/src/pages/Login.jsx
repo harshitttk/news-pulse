@@ -9,6 +9,8 @@ const Login = () => {
     username: '',
     password: ''
   });
+  const [loading, setLoading] = useState(false);
+  const [clicked, setClicked] = useState(false); // Clicked state for animation
   const navigate = useNavigate();
 
   const { username, password } = formData;
@@ -17,6 +19,8 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setClicked(true); // Set clicked state to true to trigger animation
     try {
       await axiosInstance.post('/api/auth/login', { username, password });  // Send only username and password
       toast.success('Login successful!');
@@ -27,6 +31,9 @@ const Login = () => {
       } else {
         toast.error('An error occurred. Please try again.');
       }
+    }finally {
+      setLoading(false); // Reset loading state
+      setClicked(false);
     }
   };
 
@@ -58,9 +65,11 @@ const Login = () => {
           />
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            className={`w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''} ${clicked ? 'clicked' : ''}`}
+            disabled={loading} // Disable button when loading
+            onClick={() => setClicked(true)}
           >
-            Login
+            {loading ? 'Logging in...' : 'Login'}
           </button>
           <p className="text-sm text-center mt-4">
         Not registered yet?{" "}
