@@ -10,6 +10,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [clicked, setClicked] = useState(false); // Clicked state for animation
 
   const { username, email, password } = formData;
   const navigate = useNavigate();
@@ -19,12 +21,17 @@ const Register = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setClicked(true); // Set clicked state to true to trigger animation
     try {
       await axiosInstance.post("/api/auth/register", formData);
       toast.success("User registered successfully!"); // Show success toast
       navigate('/login');
     } catch (err) {
       toast.error("Error registering user"); // Show error toast
+    }finally {
+      setLoading(false); // Reset loading state
+      setClicked(false);
     }
   };
 
@@ -65,14 +72,16 @@ const Register = () => {
           />
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            className={`w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''} ${clicked ? 'clicked' : ''}`}
+            disabled={loading} // Disable button when loading
+            onClick={() => setClicked(true)}
           >
-            Register
+            {loading ? 'Signing up...' : 'Register'}
           </button>
           <p className="text-sm text-center mt-4">
-            Not registered yet?{" "}
+            Already registered?{" "}
             <Link to={"/login"} className="underline text-blue-600">
-              Create an Account
+              Login to your account
             </Link>
           </p>
         </form>

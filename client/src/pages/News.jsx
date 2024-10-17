@@ -33,7 +33,7 @@ const News = () => {
 
     toast.success('Logout successful!');
     // Redirect to login or homepage after logout
-    navigate('/login');
+    navigate('/');
   };
 
   const handleChangePreferences = () => {

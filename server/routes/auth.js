@@ -65,8 +65,8 @@ router.post("/login", async (req, res) => {
     const options = {
       expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
       httpOnly: true,
-      // sameSite: 'strict',
-      sameSite: 'None', // Allow cross-origin requests with credentials
+      sameSite: 'strict',
+      // sameSite: 'None', // Allow cross-origin requests with credentials
       secure: process.env.NODE_ENV === 'production',  // Enable secure cookies in production
     };
 
